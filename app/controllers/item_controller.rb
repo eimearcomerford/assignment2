@@ -33,7 +33,14 @@ class ItemController < ApplicationController
   	end
   end
 
-
+  def delete
+  	@item = Item.find(params[:id])
+  	if @item.destroy
+  		redirect_to root_path
+  	else
+  		render item_show_path (@item)
+  	end
+  end
   private  
 	def item_params 
 		params.require(:item).permit(:id, :name, :price)  
